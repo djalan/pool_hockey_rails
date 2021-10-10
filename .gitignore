@@ -9,7 +9,7 @@
 *.rbc
 capybara-*.html
 .rspec
-# NEED TO BACKUP MY PLAYERS /db/*.sqlite3
+# NEED TO BACKUP MY PLAYERS WITH DOCKER VOLUME /db/*.sqlite3
 /db/*.sqlite3-journal
 /db/*.sqlite3-[0-9]*
 /public/system

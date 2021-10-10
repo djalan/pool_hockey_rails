@@ -10,9 +10,4 @@ RUN gem install bundler -v 1.17.3
 
 WORKDIR /myapp
 
-#COPY Gemfile Gemfile.lock .
-#RUN bundle install
-
 COPY . /myapp
-
-#command: bash -c "rm -f /myapp/tmp/pids/server.pid;  bundle exec rails server -b 0.0.0.0"
