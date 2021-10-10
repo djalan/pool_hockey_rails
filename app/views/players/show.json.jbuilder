@@ -1,0 +1,1 @@
+json.extract! @player, :name, :points, :goals, :assists, :rank, :nhl_points, :nhl_goals, :nhl_assists, :nhl_rank, :team, :last_team, :power_play, :pp_last_year, :position, :salary, :created_at, :updated_at

@@ -1,0 +1,32 @@
+<h3>Team</h3>
+
+
+	
+<% @teams.each do |team| %>
+	<%= link_to team, home_team_roster_path %>
+<% end %>
+
+
+<%= form_tag home_team_roster_path, method: :get do %>
+  <%= label_tag(:q, "Search for:") %>
+  <%= text_field_tag(:q) %>
+  <%= submit_tag("Search") %>
+<% end %>
+
+<%= form_tag home_team_roster_path, method: :get do %>
+  <%= select_tag :q, options_for_select(@teams,"ANA") %>
+  <%= submit_tag("Pick!") %>
+<% end %>
+
+<% @teams.each do |team| %>
+	<%= link_to team, home_team_roster_path(q: team) %>
+<% end %>
+
+<% @teams.each do |team| %>
+	<%= form_tag home_team_roster_path, method: :get do %>
+	  <%= text_field_tag(:q, team) %>
+	  <%= submit_tag("Pick!") %>
+	<% end %>
+<% end %>
+
+

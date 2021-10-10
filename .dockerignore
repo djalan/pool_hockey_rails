@@ -1,0 +1,12 @@
+.bundle
+.dockerignore
+.DS_Store
+.exrc
+.git
+.gitignore
+bak
+bin
+get_nhl_cap
+log
+tmp
+vendor

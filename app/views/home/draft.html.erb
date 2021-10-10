@@ -1,0 +1,189 @@
+<h3>Draft</h3>
+Total players: <%= @total_players %><br>
+Total drafted: <%= @total_drafted %><br>
+<br>
+
+<% @poolers.each do |person| %>
+	<h4><%= person %></h4>
+	<div id='draft'>
+		<table>
+			<tr>
+				<th colspan="2">Centers</th><th colspan="2">Wingers</th>
+			</tr>
+			<tr>
+				<% if p = player_drafted(person, 'C')[0] %>
+					<td><%= link_to p.name, edit_player_path(p) %></td>
+					<td><%= number_to_currency(p.salary, precision: 0) %></td>
+				<% else %>
+					<td></td>
+					<td></td>
+				<% end %>
+				<% if p = player_drafted(person, 'W')[0] %>
+					<td><%= link_to p.name, edit_player_path(p) %></td>
+					<td><%= number_to_currency(p.salary, precision: 0) %></td>
+				<% else %>
+					<td></td>
+					<td></td>
+				<% end %>
+			</tr>
+			<tr>
+				<% if p = player_drafted(person, 'C')[1] %>
+					<td><%= link_to p.name, edit_player_path(p) %></td>
+					<td><%= number_to_currency(p.salary, precision: 0) %></td>
+				<% else %>
+					<td></td>
+					<td></td>
+				<% end %>
+				<% if p = player_drafted(person, 'W')[1] %>
+					<td><%= link_to p.name, edit_player_path(p) %></td>
+					<td><%= number_to_currency(p.salary, precision: 0) %></td>
+				<% else %>
+					<td></td>
+					<td></td>
+				<% end %>
+			</tr>
+			<tr>
+				<% if p = player_drafted(person, 'C')[2] %>
+					<td><%= link_to p.name, edit_player_path(p) %></td>
+					<td><%= number_to_currency(p.salary, precision: 0) %></td>
+				<% else %>
+					<td></td>
+					<td></td>
+				<% end %>
+				<% if p = player_drafted(person, 'W')[2] %>
+					<td><%= link_to p.name, edit_player_path(p) %></td>
+					<td><%= number_to_currency(p.salary, precision: 0) %></td>
+				<% else %>
+					<td></td>
+					<td></td>
+				<% end %>
+			</tr>
+			<tr>
+				<% if p = player_drafted(person, 'C')[3] %>
+					<td><%= link_to p.name, edit_player_path(p) %></td>
+					<td><%= number_to_currency(p.salary, precision: 0) %></td>
+				<% else %>
+					<td></td>
+					<td></td>
+				<% end %>
+				<% if p = player_drafted(person, 'W')[3] %>
+					<td><%= link_to p.name, edit_player_path(p) %></td>
+					<td><%= number_to_currency(p.salary, precision: 0) %></td>
+				<% else %>
+					<td></td>
+					<td></td>
+				<% end %>
+			</tr>
+			<tr>
+				<th colspan="2">Defenders</th>
+				<% if p = player_drafted(person, 'W')[4] %>
+					<td><%= link_to p.name, edit_player_path(p) %></td>
+					<td><%= number_to_currency(p.salary, precision: 0) %></td>
+				<% else %>
+					<td></td>
+					<td></td>
+				<% end %>
+			</tr>
+			<tr>
+				<% if p = player_drafted(person, 'D')[0] %>
+					<td><%= link_to p.name, edit_player_path(p) %></td>
+					<td><%= number_to_currency(p.salary, precision: 0) %></td>
+				<% else %>
+					<td></td>
+					<td></td>
+				<% end %>
+				<% if p = player_drafted(person, 'W')[5] %>
+					<td><%= link_to p.name, edit_player_path(p) %></td>
+					<td><%= number_to_currency(p.salary, precision: 0) %></td>
+				<% else %>
+					<td></td>
+					<td></td>
+				<% end %>
+			</tr>
+			<tr>
+				<% if p = player_drafted(person, 'D')[1] %>
+					<td><%= link_to p.name, edit_player_path(p) %></td>
+					<td><%= number_to_currency(p.salary, precision: 0) %></td>
+				<% else %>
+					<td></td>
+					<td></td>
+				<% end %>
+				<% if p = player_drafted(person, 'W')[6] %>
+					<td><%= link_to p.name, edit_player_path(p) %></td>
+					<td><%= number_to_currency(p.salary, precision: 0) %></td>
+				<% else %>
+					<td></td>
+					<td></td>
+				<% end %>
+			</tr>
+			<tr>
+				<% if p = player_drafted(person, 'D')[2] %>
+					<td><%= link_to p.name, edit_player_path(p) %></td>
+					<td><%= number_to_currency(p.salary, precision: 0) %></td>
+				<% else %>
+					<td></td>
+					<td></td>
+				<% end %>
+				<% if p = player_drafted(person, 'W')[7] %>
+					<td><%= link_to p.name, edit_player_path(p) %></td>
+					<td><%= number_to_currency(p.salary, precision: 0) %></td>
+				<% else %>
+					<td></td>
+					<td></td>
+				<% end %>
+			</tr>
+			<tr>
+				<% if p = player_drafted(person, 'D')[3] %>
+					<td><%= link_to p.name, edit_player_path(p) %></td>
+					<td><%= number_to_currency(p.salary, precision: 0) %></td>
+				<% else %>
+					<td></td>
+					<td></td>
+				<% end %>
+				<th colspan="2">Goalers</th>
+			</tr>
+			<tr>
+				<% if p = player_drafted(person, 'D')[4] %>
+					<td><%= link_to p.name, edit_player_path(p) %></td>
+					<td><%= number_to_currency(p.salary, precision: 0) %></td>
+				<% else %>
+					<td></td>
+					<td></td>
+				<% end %>
+				<% if p = player_drafted(person, 'G')[0] %>
+					<td><%= link_to p.name, edit_player_path(p) %></td>
+					<td><%= number_to_currency(p.salary, precision: 0) %></td>
+				<% else %>
+					<td></td>
+					<td></td>
+				<% end %>
+			</tr>
+			<tr>
+				<% if p = player_drafted(person, 'D')[5] %>
+					<td><%= link_to p.name, edit_player_path(p) %></td>
+					<td><%= number_to_currency(p.salary, precision: 0) %></td>
+				<% else %>
+					<td></td>
+					<td></td>
+				<% end %>
+				<% if p = player_drafted(person, 'G')[1] %>
+					<td><%= link_to p.name, edit_player_path(p) %></td>
+					<td><%= number_to_currency(p.salary, precision: 0) %></td>
+				<% else %>
+					<td></td>
+					<td></td>
+				<% end %>
+			</tr>
+		</table>
+	</div>
+	<h5>
+		Cap hit:   <%= number_to_currency @cap, precision: 0 %><br>
+		Minus : <%= number_to_currency @spent[person], precision: 0 %> (<%= @nbr_drafted[person] %>)<br>
+		$$ Left:  <%= number_to_currency @left[person], precision: 0 %><br>
+		Avg left:   <%= number_to_currency @average[person], precision: 0 %>
+	</h5>
+	<br>
+	<br>
+<% end %>
+
+			

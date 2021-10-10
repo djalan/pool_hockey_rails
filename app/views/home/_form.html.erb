@@ -1,0 +1,85 @@
+<%= form_for(@player) do |f| %>
+  <% if @player.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@player.errors.count, "error") %> prohibited this player from being saved:</h2>
+
+      <ul>
+      <% @player.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+  <tr>
+	  <td>
+		  <div class="field">
+			  <%= f.number_field :rank %>
+		  </div>
+	  </td>
+	  <td>
+		  <div class="field">
+			  <%= f.text_field :name %>
+		  </div>
+	  </td>
+	  <td>
+		  <div class="field">
+			  <%= f.text_field :team %>
+		  </div>
+	  </td>
+	  <td>
+		  <td>
+			  <div class="field">
+				  <%= f.text_field :position %>
+			  </div>
+		  </td>
+		  <div class="field">
+			  <%= f.text_field :games %>
+		  </div>
+	  </td>
+	  <td>
+		  <div class="field">
+			  <%= f.number_field :points %>
+		  </div>
+	  </td>
+	  <td>
+		  <div class="field">
+			  <%= f.number_field :nhl_goals %>
+		  </div>
+	  </td>
+	  <td>
+		  <div class="field">
+			  <%= f.number_field :nhl_assists %>
+		  </div>
+	  </td>
+	  <td>
+		  <div class="field">
+			  <%= f.number_field :salary %>
+		  </div>
+	  </td>
+	  <td>
+		  <div class="field">
+			  <%= f.text_field :power_play %>
+		  </div>
+	  </td>
+	  <td>
+		  <div class="field">
+			  <%= f.text_field :pp_last_year %>
+		  </div>
+	  </td>
+
+
+	  <td>
+		  <div class="field">
+			  <%= f.text_field :color %>
+		  </div>
+	  </td>
+	  <td>
+		  <div class="field">
+			  <%= f.number_field :drafted %>
+		  </div>
+	  </td>
+  </tr>
+  
+<% end %>

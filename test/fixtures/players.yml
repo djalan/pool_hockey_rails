@@ -1,0 +1,43 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+Crosby:
+  id: 1
+  name: Sydney Crosby
+  points: 71
+  goals: 30
+  assists: 41
+  rank: 1
+  nhl_points: 56
+  nhl_goals: 15
+  nhl_assists: 41
+  nhl_rank: 1
+  team: Penguins
+  last_team: Penguins
+  power_play: F1
+  pp_last_year: F1
+  position: C
+  salary: 8700000
+  color: green
+  games: 40
+  drafted: false
+
+Malkin:
+  id: 2
+  name: Evgeni Malkin
+  points: 5
+  goals: 2
+  assists: 3
+  rank: 2
+  nhl_points: 13
+  nhl_goals: 6
+  nhl_assists: 7
+  nhl_rank: 2
+  team: Penguins
+  last_team: Penguins
+  power_play: F2
+  pp_last_year: F2
+  position: C
+  salary: 8700000
+  color: white
+  games: 30
+  drafted: false

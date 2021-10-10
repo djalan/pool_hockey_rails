@@ -1,0 +1,73 @@
+<h1>Listing players</h1>
+
+<p><%= link_to 'New Player', new_player_path %></p>
+
+<%= form_tag edit_individual_players_path do %>
+
+	<p><%= submit_tag "Edit checked" %></p>
+
+	<table>
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>Games</th>
+				<th>Points</th>
+				<th>Goals</th>
+				<th>Assists</th>
+				<th>Rank</th>
+				<th>Nhl points</th>
+				<th>Nhl goals</th>
+				<th>Nhl assists</th>
+				<th>Nhl rank</th>
+				<th>Team</th>
+				<th>Last team</th>
+				<th>Power play</th>
+				<th>Pp last year</th>
+				<th>Position</th>
+				<th>Salary</th>
+				<th>Color</th>
+				<th>Drafted</th>
+				<th>Season</th>
+				<th>Rank position</th>
+				<th>Rank global</th>
+				<th></th>
+				<th></th>
+				<th></th>
+				<th></th>
+			</tr>
+		</thead>
+
+		<tbody>
+			<% @players.each do |player| %>
+			<tr style='background-color:<%=player.color%>'>
+				<td><%= player.name %></td>
+				<td><%= player.games %></td>
+				<td><%= player.points %></td>
+				<td><%= player.goals %></td>
+				<td><%= player.assists %></td>
+				<td><%= player.rank %></td>
+				<td><%= player.nhl_points %></td>
+				<td><%= player.nhl_goals %></td>
+				<td><%= player.nhl_assists %></td>
+				<td><%= player.nhl_rank %></td>
+				<td><%= player.team %></td>
+				<td><%= player.last_team %></td>
+				<td><%= player.power_play %></td>
+				<td><%= player.pp_last_year %></td>
+				<td><%= player.position %></td>
+				<td><%= number_to_currency player.salary, precision: 0 %></td>
+				<td><%= player.color %></td>
+				<td><%= player.drafted %></td>
+				<td><%= player.season %></td>
+				<td><%= player.my_rank_position %></td>
+				<td><%= player.my_rank_global %></td>
+				<td><%= check_box_tag "player_ids[]", player.id %></td>
+				<td><%= link_to 'Show', player %></td>
+				<td><%= link_to 'Edit', edit_player_path(player) %></td>
+				<td><%= link_to 'Destroy', player, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+			</tr>
+			<% end %>
+		</tbody>
+	</table>
+	
+<% end %>

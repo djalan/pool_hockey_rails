@@ -1,0 +1,41 @@
+<h1>Editing multiple</h1>
+
+<table>
+	<thead>
+		<tr>
+			<th>Rank</th>
+			<th>Name</th>
+			<th>Team</th>
+			<th>Position</th>
+			<th>Games</th>
+			<th>Points</th>
+			<th>Goals</th>
+			<th>Assists</th>
+			<th>Salary</th>
+			<th>Power play</th>
+			<th>Last PP</th>
+			<th>Color</th>
+			<th>Drafted</th>
+			<th></th>
+		</tr>
+	</thead>
+
+	<tbody>
+		<%= render 'form' %>
+	</tbody>
+
+</table>
+
+<br>
+<br>
+<br>
+<br>
+
+<div class="actions">
+	<%= f.submit %>
+</div>
+
+
+
+<%= link_to 'Show', @player %> |
+<%= link_to 'Back', players_path %>

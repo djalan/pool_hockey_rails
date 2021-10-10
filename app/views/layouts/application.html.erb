@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+
+
+<html>
+
+
+<head>
+  <title>My poule</title>
+  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= csrf_meta_tags %>
+</head>
+
+<body class="<%= controller.controller_name %>">
+
+<div id='banner'>
+	<h3 style="color:blue">
+		<%= link_to "All", home_all_path %>
+		/ <%= link_to "Skaters", home_skaters_path %>
+		<%= link_to "SR", home_skaters_rank_path %>
+		<%= link_to "Glob", home_skaters_global_path %>
+		/ <%= link_to "Wingers", home_wingers_path %>
+		<%= link_to "WR", home_wingers_rank_path %>
+		/ <%= link_to "Centers", home_centers_path %>
+		<%= link_to "CR", home_centers_rank_path %>
+		/ <%= link_to "Defenders", home_defenders_path %>
+		<%= link_to "DR", home_defenders_rank_path %>
+		/ <%= link_to "Goalers", home_goalers_path %>
+		<%= link_to "GR", home_goalers_rank_path %>
+		<br>
+		<%= link_to "Players", players_path %>
+		/ <%= link_to "Power Play", home_pp_path %> <%= link_to "+", home_pplast_path %>
+		/ <%= link_to "Standings", home_standings_path %>
+		/ <%= link_to "Draft", home_draft_path %>
+		/ <%= link_to "-i-", home_i_path %>
+		/ <%= link_to "Test", home_test_path %>
+		/ <%= link_to "Team", home_team_path %>
+		<br>
+		<% @teams.each do |team| %>
+			<%= link_to team, home_team_roster_path(q: team) %>
+		<% end %>
+	</h3>
+	<hr>
+</div>
+
+<div id='main'>
+	<%= yield %>
+</div>
+
+</body>
+
+
+</html>

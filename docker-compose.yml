@@ -1,0 +1,16 @@
+version: '3.8'
+
+volumes:
+    pool_ruby_gems:
+
+services:
+  web:
+    command: ./entrypoint.sh
+    volumes:
+      - .:/myapp
+      - pool_ruby_gems:/var/tmp/pool_ruby_gems
+    ports:
+      - "3000:3000"
+    build:
+      context: .
+

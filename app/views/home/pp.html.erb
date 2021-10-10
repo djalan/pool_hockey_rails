@@ -1,0 +1,46 @@
+<div id='powerplay'>
+<h1>Power Play</h1>
+<br>
+<% @teams.each do |team| %>
+	<%= link_to team, home_pp_path(:anchor => team) %>
+<% end %>
+<br>
+<% @teams.each do |team| %>
+		<h2><a name="<%= team %>"><%= team %></a></h2>
+		<table>
+			<tr>
+				<th>F1</th>
+				<th>F2</th>
+				<th>F3</th>
+				<th>F4</th>
+				<th>F5</th>
+				<th>F6</th>
+				<th>D1</th>
+				<th>D2</th>
+				<th>D3</th>
+				<th>M</th>
+				<th>N</th>
+			</tr>
+			<tr>
+				<% ['F1', 'F2', 'F3', 'F4', 'F5', 'F6', 'D1', 'D2', 'D3', 'M', 'N'].each do |position| %>
+					<% if p = player_info(team, position) %>
+						<td style='width:160px;background-color:<%= p.color %>'>
+							<%= link_to p.name, edit_player_path(p) %> (<%= p.position %>)
+							<br>
+							<%= number_to_currency(p.salary, precision: 0) %>
+							<br>
+							#<%= p.rank %>
+							<br>
+							<%= p.points %> pts in <%= p.games %> gp
+						</td>
+					<% else %>
+						<td style='width:160px'></td>
+					<% end %>
+				<% end %>
+			</tr>
+		</table>
+		<br>
+		<br>
+		<br>
+<% end %>
+</div>

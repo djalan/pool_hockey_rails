@@ -1,0 +1,39 @@
+<table>
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th>Team</th>
+			<th>Position</th>
+			<th>Games</th>
+			<th>Points</th>
+			<th>Goals</th>
+			<th>Assists</th>
+			<th>Salary</th>
+			<th>Power play</th>
+			<th>Edit</th>
+			<th>Select</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% @players.each do |player| %>
+		<tr style='background-color:<%=player.color%>'>
+			<td><%= player.name %></td>
+			<td><%= player.team %></td>
+			<td><%= player.position %></td>
+			<td><%= player.games %></td>
+			<td><%= player.points %></td>
+			<td><%= player.nhl_goals %></td>
+			<td><%= player.nhl_assists %></td>
+			<td><%= number_to_currency player.salary, precision: 0 %></td>
+			<td><%= player.power_play %></td>
+			<td><%= link_to 'Edit', edit_player_path(player) %></td>
+			<td>
+				<%= form_for player do |f| %>
+					<%= f.hidden_field :drafted, value: 'yes' %>
+					<%= f.submit "Click to draft" %>
+				<% end %>
+			</td>
+		</tr>
+		<% end %>
+	</tbody>
+</table>

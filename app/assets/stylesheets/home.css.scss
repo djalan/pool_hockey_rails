@@ -1,0 +1,48 @@
+// Place all the styles related to the home controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.home {
+	#draft {
+		table {
+			width:				800px;
+			border-collapse:	collapse;
+		}
+		
+		tr, td, th {
+		    border:		1px solid black;
+		    text-align:	center;
+			height:		20px;
+		}
+		
+		th {
+			text-align: 		center;
+			background-color:	lightgrey;
+		}
+		
+		td {
+			width:	25%;
+		}
+	}
+	
+	#cap_things {
+		table {
+			width:	100px;
+		}
+	}
+	
+	.whose_pick{
+		width: 40px;
+	}
+	
+	
+	#powerplay {
+		a {
+			color: black;
+			&.link { color:black; }
+			&.visited { color:black; }
+			&.hover { color:black; }
+			&.active { color:black; }	
+		}
+	}
+}

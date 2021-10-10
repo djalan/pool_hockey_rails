@@ -1,0 +1,7 @@
+<% if p = player_drafted(person, position)[index] %>
+	<td><%= link_to p.name, edit_player_path(p) %></td>
+	<td><%= number_to_currency(p.salary, precision: 0) %></td>
+<% else %>
+	<td></td>
+	<td></td>
+<% end %>

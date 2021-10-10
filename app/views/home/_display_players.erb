@@ -1,0 +1,65 @@
+<p id="notice">
+	<% if notice %>
+		<% if notice =~ /^[0-9]*$/ %>
+			Maximum: <%= number_to_currency notice, precision: 0 %>
+		<% else%>
+			<%= notice %>
+		<% end %>	
+	<% end %>
+</p>
+
+<%= form_tag params[:action] do |f| %>
+	<%= label_tag 'Salary max:' %>
+	<%= text_field_tag  :salary_max %>
+	<%= submit_tag "Filter" %>
+<% end %>
+
+<br>
+
+<table>
+	<thead>
+		<tr>
+			<th>My Rank</th>
+			<th>Name</th>
+			<th>Team</th>
+			<th>Position</th>
+			<th>Games</th>
+			<th>Points</th>
+			<th>Goals</th>
+			<th>Assists</th>
+			<th>Last</th>
+			<th>Salary</th>
+			<th>Power play</th>
+			<th>Edit</th>
+			<th>Select</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% @players.each do |player| %>
+		<tr style='background-color:<%=player.color%>' id='<%= player.id %>'>
+			<% unless action_name == 'skaters_global' %>
+				<td><%= player.my_rank_position %></td>
+			<% else %>
+				<td><%= player.my_rank_global %></td>
+			<% end %>
+			<td><%= player.name %></td>
+			<td><%= player.team %></td>
+			<td><%= player.position %></td>
+			<td><%= player.games %></td>
+			<td><%= player.points %></td>
+			<td><%= player.nhl_goals %></td>
+			<td><%= player.nhl_assists %></td>
+			<td><i><%= player.last_team %></i></td>
+			<td><%= number_to_currency player.salary, precision: 0 %></td>
+			<td><%= player.power_play %></td>
+			<td><%= link_to 'Edit', edit_player_path(player) %></td>
+			<td>
+				<%= form_for player do |f| %>
+					<%= f.select :drafted, Player::POOLERS %>
+					<%= f.submit "Draft" %>
+				<% end %>
+			</td>
+		</tr>
+		<% end %>
+	</tbody>
+</table>
