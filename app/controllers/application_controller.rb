@@ -4,6 +4,18 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   
   before_action :shared_stuff
+  before_action :block_user_agent
+
+  def block_user_agent
+    case request.fullpath
+    when '/home/draft', '/home/alainhello', '/home/alainbye'
+    else
+      unless cookies[:whoami] == 'alain'
+        render plain: 'forbidden', status: :forbidden
+      end
+    end
+  end
+
   def shared_stuff
     @year = '2021-2022'
     

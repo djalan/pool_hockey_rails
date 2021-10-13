@@ -142,6 +142,14 @@ class HomeController < ApplicationController
     session[:return_to] = request.fullpath
   end
   
+  def alainhello
+    cookies[:whoami] = 'alain'
+  end
+
+  def alainbye
+    cookies.delete(:whoami)
+  end
+  
   def team_roster
     session[:return_to] = request.fullpath
     @players = Player.where('drafted = "no" AND team = ? AND season = ?', params[:q], @year).order('points DESC')
