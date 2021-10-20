@@ -9,7 +9,8 @@ services:
     volumes:
       - .:/myapp
       - pool_ruby_gems:/var/tmp/pool_ruby_gems
+      - /var/tmp/djalan.hopto.org:/var/tmp/djalan.hopto.org
     ports:
-      - "3000:3000"
+      - "443:3000"
     build:
       context: .

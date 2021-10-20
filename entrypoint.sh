@@ -4,4 +4,4 @@ bundle check || bundle install
 
 rm -f tmp/pids/server.pid
 
-bundle exec rails server -b 0.0.0.0
+bundle exec puma -b 'ssl://0.0.0.0:3000?key=/var/tmp/djalan.hopto.org/privkey.pem&cert=/var/tmp/djalan.hopto.org/fullchain.pem'

@@ -52,3 +52,5 @@ gem 'rb-readline'
 
 # 2021-01-05
 gem 'execjs'
+
+gem 'puma'
