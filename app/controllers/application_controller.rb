@@ -17,10 +17,10 @@ class ApplicationController < ActionController::Base
   end
 
   def shared_stuff
-    @year = '2021-2022'
+    @year = '2021-2022-keeper'
     
-    @mode = 'draft'
-    #@mode = 'prep'
+    #@mode = 'draft'
+    @mode = 'prep'
     
     case @year
     when '2014-2015'
@@ -47,7 +47,7 @@ class ApplicationController < ActionController::Base
     when '2020-2021'
       @teams = %W{ANA ARI BOS BUF CGY CAR CHI COL CLB DAL DET EDM FLA LAK MIN MTL NAS NJD NYI NYR OTT PHI PIT SJS STL TBL TOR VAN VGK WAS WPG None}   
 
-    when '2021-2022'
+    when '2021-2022', '2021-2022-keeper'
       @teams = %W{ANA ARI BOS BUF CGY CAR CHI COL CLB DAL DET EDM FLA LAK MIN MTL NAS NJD NYI NYR OTT PHI PIT SEA SJS STL TBL TOR VAN VGK WAS WPG None}   
     end
   end
