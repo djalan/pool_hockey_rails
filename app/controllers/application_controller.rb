@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
 
   def block_user_agent
     case request.fullpath
-    when '/home/draft', '/home/alainhello', '/home/alainbye'
+    when '/', '/home/draft', '/home/alainhello', '/home/alainbye'
     else
       unless cookies[:whoami] == 'alain'
         render plain: 'forbidden', status: :forbidden
