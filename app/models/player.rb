@@ -1,8 +1,8 @@
 class Player < ActiveRecord::Base
   
   #POOLERS = ['Math Ally', 'Ben', 'Mark', 'Alain', 'no', 'yes']   poolers + ['no', 'yes']
-  #POOLERS = ['Math', 'Alain', 'Mark', 'Ben', 'Couv', 'no', 'yes']
-  POOLERS = ['Math', 'Alain', 'Mark', 'Ben', 'no', 'yes']
+  POOLERS = ['Math', 'Alain', 'Mark', 'Ben', 'Couv', 'no', 'yes']
+  #POOLERS = ['Math', 'Alain', 'Mark', 'Ben', 'no', 'yes']
   
   COLORS = ['green', 'yellow', 'orange', 'red', 'cyan', 'white']
 

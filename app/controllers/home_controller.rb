@@ -227,7 +227,7 @@ class HomeController < ApplicationController
       @max_to_draft = 20          
     when '2021-2022-keeper'
       @cap = 81_500_000
-      @poolers = ['Math', 'Ben', 'Mark', 'Alain', 'Couv']
+      @poolers = ['Mark', 'Ben', 'Couv', 'Math', 'Alain']
       @max_to_draft = 20          
     end
     
