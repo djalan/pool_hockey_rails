@@ -20,6 +20,8 @@ Le pooler avec le plus de points gagne toute la cagnotte
 - 3 spots IR
 - Le joueur placé dans le Injury Reserve appartient toujours au pooler
 - Le joueur sera réactivé le plus tôt possible par le commissaire
+- Un IR n'est pas brûlé comme un échange une fois utilisé
+- Maximum de 3 joueurs dans le IR simultanément
 
 ## Nombre de benchs
 - 2021-2022: aucun bench
