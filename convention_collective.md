@@ -36,7 +36,7 @@ Long terme   | IR immédiat
 Week to week | IR immédiat
 Day to day   | 10 jours
 Covid        | IR immédiat
-Suspension   | IR immédiat
+Suspension   | 10 jours
 
 Note: 1er février blessé + 10 jours = 11 février free agent activé
 ### Waiver
