@@ -9,7 +9,7 @@ services:
     volumes:
       - .:/myapp
       - pool_ruby_gems:/var/tmp/pool_ruby_gems
-      - $HOME/certificates/djalan.hopto.org:/var/tmp/djalan.hopto.org
+      - /etc/ssl/private/djalan.hopto.org:/var/tmp/djalan.hopto.org
     ports:
       - "443:3000"
     build:
