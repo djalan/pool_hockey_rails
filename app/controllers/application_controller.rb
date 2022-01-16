@@ -17,7 +17,8 @@ class ApplicationController < ActionController::Base
   end
 
   def shared_stuff
-    @year = '2021-2022-keeper'
+    #@year = '2021-2022-keeper'
+    @year = '2021-2022'
     
     @mode = 'draft'
     #@mode = 'prep'
