@@ -6,7 +6,10 @@ Ruby on Rails application pour préparer et exécuter un draft
 ## Installation
 
 ```bash
-docker-compose up --build
+docker-compose build --no-cache
+docker-compose up
+
+docker container prune && docker volume rm pool_hockey_rails_pool_ruby_gems
 ```
 
 ## Usage
@@ -16,6 +19,7 @@ http://localhost:3000
 
 ## Notes
 
+### Fix position manually when resorting algorithms fail
 https://api.rubyonrails.org/v4.2.9/classes/ActiveRecord/QueryMethods.html#method-i-where
 
 ```ruby
@@ -25,6 +29,17 @@ redraft.each do |r|
   k.save
 end
 ```
+
+### Fix sqlite3 gem compilation with bitnami image
+apt install libsqlite3-dev
+
+### Fix puma SSL compilation with bitnami image
+apt install libssl-dev
+
+### certbot certificate
+- activate router rule for external port 80 and internal port 80
+- stop docker so certbot can use port
+- sudo certbot certonly --standalone
 
 
 ## License
