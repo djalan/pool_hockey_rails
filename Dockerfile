@@ -4,6 +4,7 @@ RUN apt-get update && apt-get install -y \
   nodejs \
   libsqlite3-dev \
   libssl-dev \
+  ncurses-bin \
   && rm -rf /var/lib/apt/lists/*
 
 ENV BUNDLE_PATH /var/tmp/pool_ruby_gems

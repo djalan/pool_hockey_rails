@@ -41,6 +41,11 @@ apt install libssl-dev
 - stop docker so certbot can use port
 - sudo certbot certonly --standalone
 
+### fix rails console inside container
+problem was TERM=xterm
+fix1: TERM=dumb bundle exec rails c
+fix2: apt install ncurses-bin
+
 
 ## License
 
