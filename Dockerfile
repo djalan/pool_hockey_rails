@@ -1,7 +1,9 @@
-FROM ruby:2.2
+FROM bitnami/ruby:2.2
 
 RUN apt-get update && apt-get install -y \
   nodejs \
+  libsqlite3-dev \
+  libssl-dev \
   && rm -rf /var/lib/apt/lists/*
 
 ENV BUNDLE_PATH /var/tmp/pool_ruby_gems
