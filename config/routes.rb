@@ -11,6 +11,7 @@ Pool::Application.routes.draw do
     get 'home/team_roster'
     get '/home/alainhello'
     get '/home/alainbye'
+    get '/home/set_year'
     
     get   'home/all'
     post  'home/all'

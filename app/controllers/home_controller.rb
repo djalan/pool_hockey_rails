@@ -1,137 +1,107 @@
 class HomeController < ApplicationController
 
-  # GET /home
-  def index
-    session[:return_to] = request.fullpath
-    @no_drafted = Player.where('drafted = "yes" AND season = ?', @year).count
-    @players = Player.where('drafted = "no" AND season = ?', @year).order('points DESC')
-    
-    #@search = Player.new(params[:player])
-    #@players = Player.where('position = ?', @search.position)
-  end
-  
-  
-  def all
+  POINTS_DESC = 'points DESC'
+  RANK_POS_ASC = 'my_rank_position ASC'
+
+  # HELPERS
+  def positions_logic(position, order)
+    where = 'drafted = "no"'
+    if position != ''
+      where += ' AND ' + position
+    end
+    if params[:salary_max]
+      where += ' AND salary <= ?'
+    end
+    where += 'AND season = ?'
+
     session[:return_to] = request.fullpath
     if params[:salary_max]
-      @players = Player.where('drafted = "no" AND salary <= ? AND season = ?', params[:salary_max], @year).order('points DESC')
       flash.now[:notice] = params[:salary_max]
+      return Player.where(where, params[:salary_max], @year).order(order)
     else
-      @players = Player.where('drafted = "no" AND season = ?', @year).order('points DESC')
+      return Player.where(where, @year,).order(order)
     end
+  end
+
+  # CONTROLLERS
+  ## /home Get
+  # def index
+  #   session[:return_to] = request.fullpath
+  #   @no_drafted = Player.where('drafted = "yes" AND season = ?', @year).count
+  #   @players = Player.where(
+  #     'drafted = "no" AND season = ?',
+  #     @year,
+  #   ).order(POINTS_DESC)
+  # end
+
+  def all
+    @players = positions_logic('', POINTS_DESC)
   end
   
   def skaters
-    session[:return_to] = request.fullpath
-    if params[:salary_max]
-      @players = Player.where('drafted = "no" AND position != "G" AND salary <= ? AND season = ?', params[:salary_max], @year).order('points DESC')
-      flash.now[:notice] = params[:salary_max]
-    else
-      @players = Player.where('drafted = "no" AND position != "G" AND season = ?', @year).order('points DESC')
-    end
+    @players = positions_logic('position != "G"', POINTS_DESC)
   end
   
   def wingers
-    session[:return_to] = request.fullpath
-    if params[:salary_max]
-      @players = Player.where('drafted = "no" AND (position = "L" OR position ="R") AND salary <= ? AND season = ?', params[:salary_max], @year).order('points DESC')
-      flash.now[:notice] = params[:salary_max]
-    else
-      @players = Player.where('drafted = "no" AND (position = "L" OR position ="R") AND season = ?', @year).order('points DESC')
-    end
+    @players = positions_logic(
+      '(position = "L" OR position = "R")',
+      POINTS_DESC,
+    )
   end
   
   def centers
-    session[:return_to] = request.fullpath
-    if params[:salary_max]
-      @players = Player.where('drafted = "no" AND position = "C" AND salary <= ? AND season = ?', params[:salary_max], @year).order('points DESC')
-      flash.now[:notice] = params[:salary_max]
-    else
-      @players = Player.where('drafted = "no" AND position = "C" AND season = ?', @year).order('points DESC')
-    end
+    @players = positions_logic('position = "C"', POINTS_DESC)
   end
   
   def defenders
-    session[:return_to] = request.fullpath
-    if params[:salary_max]
-      @players = Player.where('drafted = "no" AND position = "D" AND salary <= ? AND season = ?', params[:salary_max], @year).order('points DESC')
-      flash.now[:notice] = params[:salary_max]
-    else
-      @players = Player.where('drafted = "no" AND position = "D" AND season = ?', @year).order('points DESC')
-    end
+    @players = positions_logic('position = "D"', POINTS_DESC)
   end
 
   def goalers
-    session[:return_to] = request.fullpath
-    if params[:salary_max]
-      @players = Player.where('drafted = "no" AND position = "G" AND salary <= ? AND season = ?', params[:salary_max], @year).order('points DESC')
-      flash.now[:notice] = params[:salary_max]
-    else
-      @players = Player.where('drafted = "no" AND position = "G" AND season = ?', @year).order('points DESC')
-    end
+    @players = positions_logic('position = "G"', POINTS_DESC)
   end
   
-  ############
-  # RANK
-  ############
-  def skaters_rank
-    session[:return_to] = request.fullpath
-    if params[:salary_max]
-      @players = Player.where('drafted = "no" AND position != "G" AND salary <= ? AND season = ?', params[:salary_max], @year).order('my_rank_position ASC', 'points DESC')
-      flash.now[:notice] = params[:salary_max]
-    else
-      @players = Player.where('drafted = "no" AND position != "G" AND season = ?', @year).order('my_rank_position ASC', 'points DESC')
-    end
-  end
-  
+  ## Rank controllers
   def skaters_global
-    session[:return_to] = request.fullpath
-    if params[:salary_max]
-      @players = Player.where('drafted = "no" AND position != "G" AND salary <= ? AND season = ?', params[:salary_max], @year).order('my_rank_global ASC', 'points DESC')
-      flash.now[:notice] = params[:salary_max]
-    else
-      @players = Player.where('drafted = "no" AND position != "G" AND season = ?', @year).order('my_rank_global ASC', 'points DESC')
-    end
+    @players = positions_logic(
+      'position != "G"',
+      ['my_rank_global ASC', POINTS_DESC],
+    )
   end
 
+  def skaters_rank
+    @players = positions_logic(
+      'position != "G"',
+      [RANK_POS_ASC, POINTS_DESC],
+    )
+  end
+  
   def wingers_rank
-    session[:return_to] = request.fullpath
-    if params[:salary_max]
-      @players = Player.where('drafted = "no" AND (position = "L" OR position ="R") AND salary <= ? AND season = ?', params[:salary_max], @year).order('my_rank_position ASC', 'points DESC')
-      flash.now[:notice] = params[:salary_max]
-    else
-      @players = Player.where('drafted = "no" AND (position = "L" OR position ="R") AND season = ?', @year).order('my_rank_position ASC', 'points DESC')
-    end
+    @players = positions_logic(
+      '(position = "L" OR position = "R")',
+      [RANK_POS_ASC, POINTS_DESC],
+    )
   end
   
   def centers_rank
-    session[:return_to] = request.fullpath
-    if params[:salary_max]
-      @players = Player.where('drafted = "no" AND position = "C" AND salary <= ? AND season = ?', params[:salary_max], @year).order('my_rank_position ASC', 'points DESC')
-      flash.now[:notice] = params[:salary_max]
-    else
-      @players = Player.where('drafted = "no" AND position = "C" AND season = ?', @year).order('my_rank_position ASC', 'points DESC')
-    end
+    @players = positions_logic(
+      'position = "C"',
+      [RANK_POS_ASC, POINTS_DESC],
+    )
   end
   
   def defenders_rank
-    session[:return_to] = request.fullpath
-    if params[:salary_max]
-      @players = Player.where('drafted = "no" AND position = "D" AND salary <= ? AND season = ?', params[:salary_max], @year).order('my_rank_position ASC', 'points DESC')
-      flash.now[:notice] = params[:salary_max]
-    else
-      @players = Player.where('drafted = "no" AND position = "D" AND season = ?', @year).order('my_rank_position ASC', 'points DESC')
-    end
+    @players = positions_logic(
+      'position = "D"',
+      [RANK_POS_ASC, POINTS_DESC],
+    )
   end
   
   def goalers_rank
-    session[:return_to] = request.fullpath
-    if params[:salary_max]
-      @players = Player.where('drafted = "no" AND position = "G" AND salary <= ? AND season = ?', params[:salary_max], @year).order('my_rank_position ASC', 'points DESC')
-      flash.now[:notice] = params[:salary_max]
-    else
-      @players = Player.where('drafted = "no" AND position = "G" AND season = ?', @year).order('my_rank_position ASC', 'points DESC')
-    end
+    @players = positions_logic(
+      'position = "G"',
+      [RANK_POS_ASC, POINTS_DESC],
+    )
   end
   
   def rank
@@ -139,6 +109,7 @@ class HomeController < ApplicationController
   end
   
   def team
+    cookies.delete(:year)
     session[:return_to] = request.fullpath
   end
   
@@ -149,10 +120,18 @@ class HomeController < ApplicationController
   def alainbye
     cookies.delete(:whoami)
   end
+
+  def set_year
+    cookies[:year] = params[:year]
+    redirect_to :back
+  end
   
   def team_roster
     session[:return_to] = request.fullpath
-    @players = Player.where('drafted = "no" AND team = ? AND season = ?', params[:q], @year).order('points DESC')
+    @players = Player.where(
+      'drafted = "no" AND team = ? AND season = ?',
+      params[:team_name], @year,
+    ).order(POINTS_DESC)
   end
   
   def edit_rank
@@ -176,12 +155,10 @@ class HomeController < ApplicationController
     session[:return_to] = request.fullpath
   end
   
-  
   def i
     session[:return_to] = request.fullpath
     @players = Player.limit(10)
   end
-  
   
   def test
   end
@@ -240,13 +217,18 @@ class HomeController < ApplicationController
     @average = {}
     
     @poolers.each do |person|
-      @nbr_drafted[person]  = Player.where("drafted = '#{person}' AND season = ?", @year).count
-      @spent[person]    = Player.select(:salary).where("drafted = '#{person}' AND season = ?", @year).sum(:salary)
-      @left[person]     = @cap - @spent[person]
+      @nbr_drafted[person] = Player
+        .where("drafted = '#{person}' AND season = ?", @year)
+        .count
+      @spent[person] = Player
+        .select(:salary)
+        .where("drafted = '#{person}' AND season = ?", @year)
+        .sum(:salary)
+      @left[person] = @cap - @spent[person]
       if @nbr_drafted[person] == @max_to_draft
         @average[person] = @left[person]
       else
-        @average[person]  = @left[person] / (@max_to_draft - @nbr_drafted[person])
+        @average[person] = @left[person] / (@max_to_draft - @nbr_drafted[person])
       end
     end
   end

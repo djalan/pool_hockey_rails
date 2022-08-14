@@ -6,8 +6,14 @@
 
 <head>
   <title>draft</title>
-  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
-  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= stylesheet_link_tag(
+        "application", media: "all", "data-turbolinks-track" => true
+      )
+  %>
+  <%= javascript_include_tag(
+        "application", "data-turbolinks-track" => true
+      )
+  %>
   <%= csrf_meta_tags %>
 </head>
 
@@ -29,15 +35,33 @@
 		<%= link_to "GR", home_goalers_rank_path %>
 		<br>
 		<%= link_to "Players", players_path %>
-		/ <%= link_to "Power Play", home_pp_path %> <%= link_to "+", home_pplast_path %>
+        / <%= link_to "Power Play", home_pp_path %>
+        <%= link_to "+", home_pplast_path %>
 		/ <%= link_to "Standings", home_standings_path %>
 		/ <%= link_to "Draft", home_draft_path %>
 		/ <%= link_to "-i-", home_i_path %>
 		/ <%= link_to "Test", home_test_path %>
 		/ <%= link_to "Team", home_team_path %>
-		<br>
+        / <%= form_tag("/home/set_year", method: "get") do %>
+            <%= select_tag 'year', options_for_select(
+                  [
+                    ['2015-2016', '2015-2016'],
+                    ['2016-2017', '2016-2017'],
+                    ['2017-2018', '2017-2018'],
+                    ['2018-2019', '2018-2019'],
+                    ['2019-2020', '2019-2020'],
+                    ['2020-2021', '2020-2021'],
+                    ['2021-2022', '2021-2022'],
+                    ['2021-2022 Keeper', '2021-2022-keeper'],
+                    ['2022-2023', '2022-2023'],
+                    ['2022-2023 Keeper', '2022-2023-keeper'],
+                  ], @year
+                )
+            %>
+            <%= submit_tag("Set year") %>
+          <% end %>
 		<% @teams.each do |team| %>
-			<%= link_to team, home_team_roster_path(q: team) %>
+			<%= link_to team, home_team_roster_path(team_name: team) %>
 		<% end %>
 	</h3>
 	<hr>
