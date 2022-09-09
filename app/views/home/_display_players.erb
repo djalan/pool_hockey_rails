@@ -31,7 +31,8 @@
 			<th>Salary</th>
 			<th>Power play</th>
 			<th>Edit</th>
-			<th>Select</th>
+			<th>Pooler</th>
+			<th>Rank</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -58,6 +59,16 @@
 					<%= f.select :drafted, Player::POOLERS %>
 					<%= f.submit "Draft" %>
 				<% end %>
+			</td>
+			<td>
+              <%= form_for player do |f| %>
+                <%= f.select @which_rank, options_for_select(
+                  @choices_rank,
+                  @default_rank
+                  )
+                %>
+				<%= f.submit "Rank" %>
+              <% end %>
 			</td>
 		</tr>
 		<% end %>

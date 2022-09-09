@@ -43,22 +43,13 @@
 		/ <%= link_to "Test", home_test_path %>
 		/ <%= link_to "Team", home_team_path %>
         / <%= form_tag("/home/set_year", method: "get") do %>
-            <%= select_tag 'year', options_for_select(
-                  [
-                    ['2015-2016', '2015-2016'],
-                    ['2016-2017', '2016-2017'],
-                    ['2017-2018', '2017-2018'],
-                    ['2018-2019', '2018-2019'],
-                    ['2019-2020', '2019-2020'],
-                    ['2020-2021', '2020-2021'],
-                    ['2021-2022', '2021-2022'],
-                    ['2021-2022 Keeper', '2021-2022-keeper'],
-                    ['2022-2023', '2022-2023'],
-                    ['2022-2023 Keeper', '2022-2023-keeper'],
-                  ], @year
+            <%= select_tag 'year', options_for_select(@list_years, @year) %>
+            <%= select_tag 'showWhatPlayers', options_for_select(
+                  @list_showWhatPlayers, @showWhatPlayers
                 )
             %>
-            <%= submit_tag("Set year") %>
+            <%= select_tag 'modeDraftPrep', options_for_select(@list_mode, @mode) %>
+            <%= submit_tag("Set options") %>
           <% end %>
 		<% @teams.each do |team| %>
 			<%= link_to team, home_team_roster_path(team_name: team) %>

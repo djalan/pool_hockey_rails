@@ -6,13 +6,18 @@ class Player < ActiveRecord::Base
   
   COLORS = ['green', 'yellow', 'orange', 'red', 'cyan', 'white']
 
+  DEFAULT_RANK = 9999
 
 
   validates :name, :points, :goals, :assists, :games, :nhl_points, :nhl_goals, :nhl_assists, :nhl_rank, :position, :salary, :my_rank_global, :my_rank_position,
   presence: true
 
-  validates :points, :goals, :assists, :games, :nhl_points, :nhl_goals, :nhl_assists, :nhl_rank, :salary, :my_rank_global, :my_rank_position,
+  validates :points, :goals, :assists, :games, :nhl_points, :nhl_goals, :nhl_assists, :nhl_rank, :salary,
   numericality: {greater_than_or_equal_to: 0}
+
+  validates :my_rank_global, :my_rank_position,
+  numericality: {greater_than_or_equal_to: 1}
+  validate :my_rank_global_is_valid, :my_rank_position_is_valid
 
   #validates :nhl_rank,
   #uniqueness: true
@@ -28,8 +33,6 @@ class Player < ActiveRecord::Base
   validates :drafted,
   inclusion: POOLERS
     
-  validates :my_rank_global,
-  numericality: {greater_than_or_equal_to: 1}
 
   #validate :points_equal_sum_goals_assists, :nhl_points_equal_sum_nhl_goals_nhl_assists
 
@@ -52,5 +55,20 @@ class Player < ActiveRecord::Base
     end
   end
 
+  def my_rank_global_is_valid
+    if my_rank_global != 9999
+      unless (my_rank_global >= 1) && (my_rank_global <= 200)
+        errors.add(:my_rank_global, "must be >= 1 and <= 200 or must be 9999")
+      end
+    end
+  end
+
+  def my_rank_position_is_valid
+    if my_rank_position != 9999
+      unless (my_rank_position >= 1) && (my_rank_position <= 200)
+        errors.add(:my_rank_position, "must be >= 1 and <= 200 or must be 9999")
+      end
+    end
+  end
 
 end

@@ -10,7 +10,7 @@ require 'fileutils'
 # go()
 
 def go
-  File.open(File.expand_path('nhl2122.csv')) do |file|
+  File.open('/myapp/get_nhl_cap/nhl2223.csv') do |file|
     file.each_line do |line|
       l = line.split(';') #attention a la virgule entre les teams MTL,SJS
       p = Player.new
@@ -31,7 +31,7 @@ def go
       p.rank = l[13]
       p.drafted = 'no'
       p.color = 'white'
-      p.season = '2021-2022'
+      p.season = '2022-2023-keeper'
 
       printf("%-25s %s\n", p.name, p.valid?) unless p.valid?
       p.save

@@ -1,3 +1,5 @@
+#! /usr/bin/env python
+
 from requests import get
 from bs4 import BeautifulSoup
 
@@ -38,7 +40,7 @@ teams = {
     'kraken': 'SEA',
 }
 
-#teams = {'lightning': 'TBL'}
+# teams = {'lightning': 'TBL'}
 
 # Download
 for team in teams:

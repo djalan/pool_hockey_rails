@@ -3,9 +3,21 @@ class HomeController < ApplicationController
   POINTS_DESC = 'points DESC'
   RANK_POS_ASC = 'my_rank_position ASC'
 
-  # HELPERS
+  before_action :shared_things
+
+  def shared_things
+    @choices_rank = ["Can't update here"]
+    @default_rank = ["Can't update here"]
+    @which_rank = :my_rank_position
+  end
+
+
+  # Common functions
   def positions_logic(position, order)
-    where = 'drafted = "no"'
+    where = ''
+    if @showWhatPlayers != 'All players'
+      where += 'drafted = "no"'
+    end
     if position != ''
       where += ' AND ' + position
     end
@@ -13,6 +25,21 @@ class HomeController < ApplicationController
       where += ' AND salary <= ?'
     end
     where += 'AND season = ?'
+    where.sub!(/^ *AND */, '')
+
+    # good
+    # if @showWhatPlayers == 'All players'
+    #   where = 'drafted != "escalator594"'
+    # else
+    #   where = 'drafted = "no"'
+    # end
+    # if position != ''
+    #   where += ' AND ' + position
+    # end
+    # if params[:salary_max]
+    #   where += ' AND salary <= ?'
+    # end
+    # where += 'AND season = ?'
 
     session[:return_to] = request.fullpath
     if params[:salary_max]
@@ -22,6 +49,25 @@ class HomeController < ApplicationController
       return Player.where(where, @year,).order(order)
     end
   end
+
+  def generate_choices_rank(players, position = :my_rank_position)
+    ranks = @players
+      .distinct
+      .order(position)
+      .pluck(position)
+
+    if ranks == [9999]
+      next_rank = 1
+    else
+      next_rank = ranks[-2] + 1
+    end
+    ranks.insert(-2, next_rank)
+
+    @choices_rank = ranks
+    @default_rank = next_rank
+    @which_rank = position
+  end
+  
 
   # CONTROLLERS
   ## /home Get
@@ -67,6 +113,7 @@ class HomeController < ApplicationController
       'position != "G"',
       ['my_rank_global ASC', POINTS_DESC],
     )
+    generate_choices_rank(@players, :my_rank_global)
   end
 
   def skaters_rank
@@ -81,13 +128,15 @@ class HomeController < ApplicationController
       '(position = "L" OR position = "R")',
       [RANK_POS_ASC, POINTS_DESC],
     )
+    generate_choices_rank(@players)
   end
-  
+
   def centers_rank
     @players = positions_logic(
       'position = "C"',
       [RANK_POS_ASC, POINTS_DESC],
     )
+    generate_choices_rank(@players)
   end
   
   def defenders_rank
@@ -95,6 +144,7 @@ class HomeController < ApplicationController
       'position = "D"',
       [RANK_POS_ASC, POINTS_DESC],
     )
+    generate_choices_rank(@players)
   end
   
   def goalers_rank
@@ -102,6 +152,7 @@ class HomeController < ApplicationController
       'position = "G"',
       [RANK_POS_ASC, POINTS_DESC],
     )
+    generate_choices_rank(@players)
   end
   
   def rank
@@ -110,6 +161,8 @@ class HomeController < ApplicationController
   
   def team
     cookies.delete(:year)
+    cookies.delete(:showWhatPlayers)
+    cookies.delete(:modeDraftPrep)
     session[:return_to] = request.fullpath
   end
   
@@ -123,15 +176,31 @@ class HomeController < ApplicationController
 
   def set_year
     cookies[:year] = params[:year]
+    cookies[:showWhatPlayers] = params[:showWhatPlayers]
+    cookies[:modeDraftPrep] = params[:modeDraftPrep]
+    redirect_to :back
+  end
+
+  def set_rank
+    puts 'in set_rank controller'
+    puts 'new rank: ' + params[:new_rank]
+    puts 'playr id: ' + params[:pid]
     redirect_to :back
   end
   
   def team_roster
     session[:return_to] = request.fullpath
-    @players = Player.where(
-      'drafted = "no" AND team = ? AND season = ?',
-      params[:team_name], @year,
-    ).order(POINTS_DESC)
+
+    if @showWhatPlayers == 'All players'
+      @players = Player.where(
+        'team = ? AND season = ?', params[:team_name], @year,
+      ).order(POINTS_DESC)
+    else
+      @players = Player.where(
+        'drafted = ? AND team = ? AND season = ?',
+        'no', params[:team_name], @year,
+      ).order(POINTS_DESC)
+    end
   end
   
   def edit_rank
@@ -205,6 +274,14 @@ class HomeController < ApplicationController
     when '2021-2022-keeper'
       @cap = 81_500_000
       @poolers = ['Mark', 'Ben', 'Couv', 'Math', 'Alain']
+      @max_to_draft = 20          
+    when '2022-2023'
+      @cap = 82_500_000
+      @poolers = ['Math', 'Alain', 'Ben', 'Mark']
+      @max_to_draft = 20          
+    when '2022-2023-keeper'
+      @cap = 82_500_000
+      @poolers = ['Couv', 'Mark', 'Ben', 'Math', 'Alain']
       @max_to_draft = 20          
     end
     
