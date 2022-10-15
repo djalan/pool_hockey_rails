@@ -1,5 +1,9 @@
 <p id="notice"><%= notice %></p>
 
+<%= link_to 'Edit', edit_player_path(@player) %> |
+<%= link_to 'Back', players_path %> |
+<%= link_to 'return_to', session[:return_to] %>
+
 <p>
   <strong>Name:</strong>
   <%= @player.name %>
@@ -66,16 +70,6 @@
 </p>
 
 <p>
-  <strong>Power play:</strong>
-  <%= @player.power_play %>
-</p>
-
-<p>
-  <strong>Pp last year:</strong>
-  <%= @player.pp_last_year %>
-</p>
-
-<p>
   <strong>Position:</strong>
   <%= @player.position %>
 </p>
@@ -108,6 +102,41 @@
 <p>
   <strong>Season:</strong>
   <%= @player.season %>
+</p>
+
+<p>
+  <strong>Power play:</strong>
+  <%= @player.power_play %>
+</p>
+
+<p>
+  <strong>Pp last year:</strong>
+  <%= @player.pp_last_year %>
+</p>
+
+<p>
+  <strong>Even Strength:</strong>
+  <%= @player.even_strength %>
+</p>
+
+<p>
+  <strong>Draft year:</strong>
+  <%= @player.draft_year %>
+</p>
+
+<p>
+  <strong>Contract:</strong>
+  <%= @player.contract %>
+</p>
+
+<p>
+  <strong>Info:</strong>
+  <%= @player.info %>
+</p>
+
+<p>
+  <strong>Live Draft:</strong>
+  <%= @player.live_draft %>
 </p>
 
 <%= link_to 'Edit', edit_player_path(@player) %> |

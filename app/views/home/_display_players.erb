@@ -22,14 +22,18 @@
 			<th>My Rank</th>
 			<th>Name</th>
 			<th>Team</th>
-			<th>Position</th>
-			<th>Games</th>
+			<th>Pos</th>
+			<th>GP</th>
 			<th>Points</th>
-			<th>Goals</th>
-			<th>Assists</th>
+			<th>Gol</th>
+			<th>Ass</th>
 			<th>Last</th>
 			<th>Salary</th>
-			<th>Power play</th>
+			<th>PP</th>
+			<th>Even</th>
+			<th>Draft</th>
+			<th>Contract</th>
+			<th>Info</th>
 			<th>Edit</th>
 			<th>Pooler</th>
 			<th>Rank</th>
@@ -53,6 +57,10 @@
 			<td><i><%= player.last_team %></i></td>
 			<td><%= number_to_currency player.salary, precision: 0 %></td>
 			<td><%= player.power_play %></td>
+			<td><%= player.even_strength %></td>
+			<td><%= player.draft_year %></td>
+			<td><%= player.contract %></td>
+			<td><%= player.info %></td>
 			<td><%= link_to 'Edit', edit_player_path(player) %></td>
 			<td>
 				<%= form_for player do |f| %>

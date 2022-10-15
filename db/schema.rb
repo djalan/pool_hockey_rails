@@ -11,10 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140909043550) do
+ActiveRecord::Schema.define(version: 20220926212330) do
 
-  create_table "players", force: true do |t|
-    t.string   "name"
+  create_table "players", force: :cascade do |t|
+    t.string   "name",             limit: 255
     t.integer  "points"
     t.integer  "goals"
     t.integer  "assists"
@@ -23,20 +23,25 @@ ActiveRecord::Schema.define(version: 20140909043550) do
     t.integer  "nhl_goals"
     t.integer  "nhl_assists"
     t.integer  "nhl_rank"
-    t.string   "team"
-    t.string   "last_team"
-    t.string   "power_play"
-    t.string   "pp_last_year"
-    t.string   "position"
+    t.string   "team",             limit: 255
+    t.string   "last_team",        limit: 255
+    t.string   "power_play",       limit: 255
+    t.string   "pp_last_year",     limit: 255
+    t.string   "position",         limit: 255
     t.integer  "salary"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "color"
+    t.string   "color",            limit: 255
     t.integer  "games"
-    t.string   "drafted",          default: "no"
-    t.string   "season",           default: "unknown"
-    t.integer  "my_rank_global",   default: 9999
-    t.integer  "my_rank_position", default: 9999
+    t.string   "drafted",          limit: 255, default: "no"
+    t.string   "season",           limit: 255, default: "unknown"
+    t.integer  "my_rank_global",               default: 9999
+    t.integer  "my_rank_position",             default: 9999
+    t.string   "even_strength"
+    t.string   "draft_year"
+    t.string   "contract"
+    t.string   "info"
+    t.integer  "live_draft"
   end
 
 end
