@@ -15,18 +15,19 @@ Le pooler avec le plus de points gagne toute la cagnotte
 ## Nombre d'échanges
 - 3 échanges
 - Le joueur perdu redevient free agent / disponible pour tous
+- Valide même quand la saison est terminée
+- Possible de reporter 1 échange maximum pour la prochaine saison
 
 ## Nombre de spots IR
-- 3 spots IR
+- 2 spots IR
 - Le joueur placé dans le Injury Reserve appartient toujours au pooler
 - Le joueur sera réactivé le plus tôt possible par le commissaire
 - Un IR n'est pas brûlé comme un échange une fois utilisé
-- Maximum de 3 joueurs dans le IR simultanément
+- Maximum de 2 joueurs dans le IR simultanément
+- Diminution de 3 IR à 2: trop de gestion et plus de parité car des poolers n'en font pas
 
 ## Nombre de benchs
-- 2021-2022: aucun bench
-- 2022-2023: nombre et prix des joueurs à déterminer
-- 2023-2024: les poolers voteront pour avoir des benchs ou non
+- aucun bench car les IR c'est déjà trop long à gérer
 
 ## Blessés
 ### Utilisation du IR
@@ -35,7 +36,7 @@ Terme        | Timeline
 Long terme   | IR immédiat
 Week to week | IR immédiat
 Day to day   | 10 jours
-Covid        | IR immédiat
+Covid        | 10 jours
 Suspension   | 10 jours
 
 Note: 1er février blessé + 10 jours = 11 février free agent activé
@@ -45,17 +46,21 @@ Note: 1er février blessé + 10 jours = 11 février free agent activé
 
 ## Draft
 ### Ordre du draft
-- Keeper rounds 1-10 en ordre non-serpentin
+- Keeper rounds 1-10 en ordre non-serpentin (vraiment de la marde, snake au complet est beaucoup mieux)
 - Reste des rounds 11-20 en ordre snake
 ### Lotterie des derniers
 Pour éviter qu'un DG sabote son équipe, une lotterie a lieu
-- Le 5/5 a 60%
-- Le 4/5 a 25%
-- Le 3/5 a 15%
-- TODO déterminer les % ci-dessus
+- Le 5/5 a 45%
+- Le 4/5 a 35%
+- Le 3/5 a 25%
+
 ### Droit de parole et non pas obligation à repêcher
-Le pooler qui parle en premier choisit s'il repêche 1, 2, 3, 4 ou 5
-etc.
+Le pooler qui parle en premier choisit s'il repêche:
+- 1-10
+- 2-9
+- 3-8
+- 4-7
+- 5-6
 
 ## Points
 Position | Points
@@ -77,7 +82,6 @@ Gardien défaite OT | 1
 ## Keepers
 - Le nombre de keepers à chaque année est toujours 10 (min et max)
 - Un keeper sans salaire lors du draft coûtera le montant de l'année précédente
-- La liste des keepers de chaque pooler doit être connue 1 semaine avant le draft
 
 ## Échange de joueurs entre poolers
 Interdit
