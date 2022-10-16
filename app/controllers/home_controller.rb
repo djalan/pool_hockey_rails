@@ -44,9 +44,9 @@ class HomeController < ApplicationController
     session[:return_to] = request.fullpath
     if params[:salary_max]
       flash.now[:notice] = params[:salary_max]
-      return Player.where(where, params[:salary_max], @year).order(order)
+      return Player.where(where, params[:salary_max], @year).order(order).limit(350)
     else
-      return Player.where(where, @year,).order(order)
+      return Player.where(where, @year,).order(order).limit(350)
     end
   end
 

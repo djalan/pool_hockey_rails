@@ -12,5 +12,6 @@ services:
       - /etc/ssl/private/djalan.hopto.org:/var/tmp/djalan.hopto.org
     ports:
       - "443:3000"
+      - "80:9292"
     build:
       context: .
