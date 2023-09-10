@@ -64,6 +64,17 @@ sections = {
     ],
 }
 
+positions = {
+    "Defense": "D",
+    "Forwards": "F",
+    "Goalies": "G",
+    "Long-Term Injured Reserve": "None",
+    "NHLPA Player Assistance Program": "None",
+    "Professional Tryout": "None",
+    "Injured Reserve": "None",
+    "Season Opening Injured Reserve": "None",
+}
+
 if ONE_TEAM_ONLY:
     teams = {"lightning": "TBL"}
 
@@ -106,25 +117,27 @@ with open("salary.csv", "w") as output:
                 # print and comment below then README sed
                 # print(section_name)
                 # comment below
-                skip_section = False;
-                for section_name_short in sections['skip']:
+                skip_section = True
+                player_position = None
+                for section_name_short in sections["keep"]:
                     if section_name_short in section_name:
-                        skip_section = True
+                        skip_section = False
+                        player_position = positions[section_name_short]
                         break
                 if skip_section:
                     continue
-                
-                tbody = table.find('tbody')
-                players = tbody.find_all('tr')
+
+                tbody = table.find("tbody")
+                players = tbody.find_all("tr")
 
                 for player in players:
                     team_abbr = teams[team]
-                    td = player.find_all('td')
-                    href = td[0].find('a').get('href')
+                    td = player.find_all("td")
+                    href = td[0].find("a").get("href")
                     try:
-                        cap = td[8].find("span", {'class': 'cap'}).text
+                        cap = td[8].find("span", {"class": "cap"}).text
                     except AttributeError:
-                        cap = '0'
-                    name = href[9:].replace('-', ' ').title()
-                    caphit = cap.replace('$', '').replace(',', '')
-                    output.write(f'{name};{caphit};{team_abbr}\n')
+                        cap = "0"
+                    name = href[9:].replace("-", " ").title()
+                    caphit = cap.replace("$", "").replace(",", "")
+                    output.write(f"{name};{caphit};{team_abbr};{player_position}\n")
