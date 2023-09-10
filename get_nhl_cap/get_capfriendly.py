@@ -2,53 +2,13 @@
 
 from requests import get
 from bs4 import BeautifulSoup
+from sys import exit
 
 BASE_URL = 'https://www.capfriendly.com/teams/'
+DOWNLOADS_DIR = 'downloads'
 
-teams = {
-    'lightning': 'TBL',
-    'capitals': 'WAS',
-    'blues': 'STL',
-    'oilers': 'EDM',
-    'ducks': 'ANA',
-    'jets': 'WPG',
-    'canucks': 'VAN',
-    'canadiens': 'MTL',
-    'mapleleafs': 'TOR',
-    'goldenknights': 'VGK',
-    'flames': 'CGY',
-    'stars': 'DAL',
-    'hurricanes': 'CAR',
-    'penguins': 'PIT',
-    'avalanche': 'COL',
-    'coyotes': 'ARI',
-    'flyers': 'PHI',
-    'sharks': 'SJS',
-    'wild': 'MIN',
-    'bruins': 'BOS',
-    'sabres': 'BUF',
-    'islanders': 'NYI',
-    'blackhawks': 'CHI',
-    'bluejackets': 'CLB',
-    'rangers': 'NYR',
-    'panthers': 'FLA',
-    'predators': 'NAS',
-    'redwings': 'DET',
-    'senators': 'OTT',
-    'kings': 'LAK',
-    'devils': 'NJD',
-    'kraken': 'SEA',
-}
 
-# teams = {'lightning': 'TBL'}
-
-# Download
-for team in teams:
-    URL = f'{BASE_URL}{team}'
-    FILENAME = f'get/{team}.html'
-    with open(FILENAME, "wb") as file:
-        response = get(URL)
-        file.write(response.content)
+teams = {'lightning': 'TBL'}
 
 
 #import pdb; pdb.set_trace()
@@ -57,15 +17,25 @@ for team in teams:
 with open('salary.csv', 'w') as output:
     for team in teams:
         print(team)
-        FILENAME = f'get/{team}.html'
-        PRETTY = f'get/{team}.pretty.html'
+        FILENAME = f'{DOWNLOADS_DIR}/{team}.html'
+        PRETTY = f'{DOWNLOADS_DIR}/{team}.pretty.html'
         with open(FILENAME, 'r') as f:
             contents = f.read()
             soup = BeautifulSoup(contents, 'lxml')
             with open(PRETTY, 'w') as pretty:
                 pretty.write(soup.prettify())
-            table = soup.find('table', id='team')
-            players_c = table.find_all('tr', {'class': ['odd c', 'even c']})
+
+            #table = soup.find('table', id='team')
+            #players_c = table.find_all('tr', {'class': ['odd c', 'even c']})
+
+            tables = soup.find_all('table', {"class": 'cf_teamProfileRosterSection__table'})
+            #tables = soup.find_all('div', {"class": 'cf_teamProfileRosterSection__table_wrapper'})
+            print(len(tables))
+            for table in tables:
+                section_name = table.find('th').text
+                print(section_name)
+            exit(0)
+
             for player in players_c:
                 team_abbr = teams[team]
                 td = player.find_all('td')

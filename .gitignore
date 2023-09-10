@@ -1,5 +1,5 @@
 /get_nhl_cap/venv
-/get_nhl_cap/get/*.html
+/get_nhl_cap/downloads/
 /get_nhl_cap/get/*.xls*
 /*.vim
 /properties.private
