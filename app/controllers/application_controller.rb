@@ -30,13 +30,14 @@ class ApplicationController < ActionController::Base
       ['2021-2022 Keeper', '2021-2022-keeper'],
       ['2022-2023'],
       ['2022-2023 Keeper', '2022-2023-keeper'],
+      ['2023-2024 Keeper', '2023-2024-keeper'],
     ]
     list_years_db_values = @list_years.map { |arr| arr.last }
 
     if cookies[:year] && (list_years_db_values.include? cookies[:year])
       @year = cookies[:year]
     else
-      @year = '2022-2023'
+      @year = '2023-2024'
     end
 
     # Dropdown what players
@@ -89,7 +90,7 @@ class ApplicationController < ActionController::Base
         NJD NYI NYR OTT PHI PIT SJS STL TBL TOR VAN VGK WAS WPG None
       }
 
-    when '2021-2022', '2021-2022-keeper', '2022-2023', '2022-2023-keeper'
+    when '2021-2022', '2021-2022-keeper', '2022-2023', '2022-2023-keeper', '2023-2024', '2023-2024-keeper'
       @teams = %W{
         ANA ARI BOS BUF CGY CAR CHI COL CLB DAL DET EDM FLA LAK MIN MTL NAS
         NJD NYI NYR OTT PHI PIT SEA SJS STL TBL TOR VAN VGK WAS WPG None

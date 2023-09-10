@@ -66,3 +66,9 @@ fix2: `apt install ncurses-bin`
 - Clean section name by removing stuff after the opening bracket `Defense (useless here)`
 - `cat sections.txt | sed -n 's/\([^(]*\).*/\1/p' | sed 's/ \+$//g' | sort -u > sections_unique.txt`
 
+
+### Get positions from NHL
+```bash
+curl -o teams.json 'https://statsapi.web.nhl.com/api/v1/teams?expand=team.roster&season=20232024'
+cat teams.json | jq -r '.teams | .[] | .roster | .roster | .[] | "\(.person.fullName);\(.position.code)"'
+```

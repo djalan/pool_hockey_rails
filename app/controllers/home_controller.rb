@@ -90,13 +90,13 @@ class HomeController < ApplicationController
   
   def wingers
     @players = positions_logic(
-      '(position = "L" OR position = "R")',
+      '(position = "L" OR position = "R" OR position = "F")',
       POINTS_DESC,
     )
   end
   
   def centers
-    @players = positions_logic('position = "C"', POINTS_DESC)
+    @players = positions_logic('(position = "C" OR position = "F")', POINTS_DESC)
   end
   
   def defenders
@@ -282,6 +282,14 @@ class HomeController < ApplicationController
     when '2022-2023-keeper'
       @cap = 82_500_000
       @poolers = ['Couv', 'Mark', 'Ben', 'Math', 'Alain']
+      @max_to_draft = 20          
+    when '2023-2024'
+      @cap = 83_500_000
+      @poolers = ['Math', 'Alain', 'Ben', 'Mark']
+      @max_to_draft = 20          
+    when '2023-2024-keeper'
+      @cap = 83_500_000
+      @poolers = ['Ben', 'Couv', 'Math', 'Alain', 'Mark']
       @max_to_draft = 20          
     end
     
