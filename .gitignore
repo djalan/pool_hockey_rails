@@ -3,6 +3,7 @@
 /get_nhl_cap/get/*.xls*
 /*.vim
 /properties.private
+.~lock*
 
 
 #================

@@ -60,3 +60,9 @@ problem was `TERM=xterm`
 fix1: `TERM=dumb bundle exec rails console`
 
 fix2: `apt install ncurses-bin`
+
+### Get section names
+- uncomment python `print(section_name)` and comment the stuff below
+- Clean section name by removing stuff after the opening bracket `Defense (useless here)`
+- `cat sections.txt | sed -n 's/\([^(]*\).*/\1/p' | sed 's/ \+$//g' | sort -u > sections_unique.txt`
+
