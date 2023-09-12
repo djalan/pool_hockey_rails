@@ -30,6 +30,7 @@ class ApplicationController < ActionController::Base
       ['2021-2022 Keeper', '2021-2022-keeper'],
       ['2022-2023'],
       ['2022-2023 Keeper', '2022-2023-keeper'],
+      ['2023-2024'],
       ['2023-2024 Keeper', '2023-2024-keeper'],
     ]
     list_years_db_values = @list_years.map { |arr| arr.last }

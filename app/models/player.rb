@@ -23,7 +23,7 @@ class Player < ActiveRecord::Base
   #uniqueness: true
 
   validates :position,
-  format: { with: /D|C|L|R|G/i, message: 'must be D C L R G' }
+  format: { with: /D|C|L|R|F|G|None/i, message: 'must be D C L R F G None' }
 
   # validates :power_play, :pp_last_year,
   # allow_blank: true, format: { with: /F1|F2|F3|F4|F5|F6|D1|D2|D3|M|N/, message: 'must be F1 F2 F3 F4 F5 F6 D1 D2 D3 M N' }

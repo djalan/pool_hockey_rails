@@ -5,12 +5,13 @@ require 'fileutils'
 # 38;P.K. Subban;Canadiens;MTL;D;42;11;27;38;33;54;87;2875000;2
 #File.open(File.expand_path('2017_2018_nhl.csv')) do |file|
 
+# docker exec -it p
 # rails console
 # require '/Users/alainsirois/workspace/2021_2022_capfriendly/pool/imp.rb'
 # go()
 
 def go
-  File.open('/myapp/get_nhl_cap/imp_20232024.csv') do |file|
+  File.open('/myapp/get_nhl_cap/imp_2023-2024.csv') do |file|
     file.each_line do |line|
       l = line.split(';') #attention a la virgule entre les teams MTL,SJS
       p = Player.new
