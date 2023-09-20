@@ -3,11 +3,14 @@
 from requests import get
 from bs4 import BeautifulSoup
 from sys import exit
+import os
 
 BASE_URL = "https://www.capfriendly.com/teams/"
 SAVE_DIR = "downloads"
 DOWNLOAD_IS_ON = False
 ONE_TEAM_ONLY = False
+
+DIR_NAME_OF_THIS_FILE = os.path.dirname(os.path.realpath(__file__))
 
 teams = {
     "lightning": "TBL",
@@ -82,35 +85,30 @@ if ONE_TEAM_ONLY:
 if DOWNLOAD_IS_ON:
     for team in teams:
         URL = f"{BASE_URL}{team}"
-        FILENAME = f"{SAVE_DIR}/{team}.html"
+        FILENAME = f"{DIR_NAME_OF_THIS_FILE}/{SAVE_DIR}/{team}.html"
         with open(FILENAME, "wb") as file:
             response = get(URL)
             file.write(response.content)
 
 
-# import pdb; pdb.set_trace()
-
+CURRENT_YEAR_CAP_POSITION = 8
+NEXT_YEAR_CAP_POSITION = 9
+NAME_START_POSITION_AFTER_BASE_URL = 9
 # Parse
-with open("salary.csv", "w") as output:
+with open(f"{DIR_NAME_OF_THIS_FILE}/salary.csv", "w") as output:
     for team in teams:
         print(team)
-        FILENAME = f"{SAVE_DIR}/{team}.html"
-        PRETTY = f"{SAVE_DIR}/{team}.pretty.html"
+        FILENAME = f"{DIR_NAME_OF_THIS_FILE}/{SAVE_DIR}/{team}.html"
+        PRETTY = f"{DIR_NAME_OF_THIS_FILE}/{SAVE_DIR}/{team}.pretty.html"
         with open(FILENAME, "r") as f:
             contents = f.read()
             soup = BeautifulSoup(contents, "lxml")
             with open(PRETTY, "w") as pretty:
                 pretty.write(soup.prettify())
 
-            # OLD
-            # table = soup.find('table', id='team')
-            # players_c = table.find_all('tr', {'class': ['odd c', 'even c']})
-
-            # NEW
             tables = soup.find_all(
                 "table", {"class": "cf_teamProfileRosterSection__table"}
             )
-            # tables = soup.find_all('div', {"class": 'cf_teamProfileRosterSection__table_wrapper'})
 
             for table in tables:
                 section_name = table.find("th").text
@@ -135,9 +133,17 @@ with open("salary.csv", "w") as output:
                     td = player.find_all("td")
                     href = td[0].find("a").get("href")
                     try:
-                        cap = td[8].find("span", {"class": "cap"}).text
+                        cap = (
+                            td[NEXT_YEAR_CAP_POSITION]
+                            .find("span", {"class": "cap"})
+                            .text
+                        )
                     except AttributeError:
                         cap = "0"
-                    name = href[9:].replace("-", " ").title()
+                    name = (
+                        href[NAME_START_POSITION_AFTER_BASE_URL:]
+                        .replace("-", " ")
+                        .title()
+                    )
                     caphit = cap.replace("$", "").replace(",", "")
                     output.write(f"{name};{caphit};{team_abbr};{player_position}\n")

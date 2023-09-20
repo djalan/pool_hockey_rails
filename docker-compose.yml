@@ -11,7 +11,7 @@ services:
       - pool_ruby_gems:/var/tmp/pool_ruby_gems
       - /etc/ssl/private/${MY_URL}:/var/tmp/${MY_URL}
     ports:
-      - "80:9292"
+      - "3000:9292"
     build:
       context: .
     env_file:
