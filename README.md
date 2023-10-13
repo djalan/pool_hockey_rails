@@ -94,6 +94,7 @@ cat teams.json | jq -r '.teams | .[] | .roster | .roster | .[] | "\(.person.full
 Make sure you end each line in the csv with a separator `;`
 
 #### Rails console inside docker
+
 ```bash
 docker exec -it CONTAINER bundle exec rails console
 p = Player.where("season = ?", '2022-2023-keeper')
@@ -101,8 +102,7 @@ p.destroy
 p.destroy_all
 ```
 
-
 #### New file is not imported
 
-- You need to `require /myapp/get_nhl_cap/imp.rb` every time you change the CSV
+- You need to `require '/myapp/get_nhl_cap/imp.rb'` every time you change the CSV
 - It appears the csv file is loaded at the same time the ruby file is `require`
