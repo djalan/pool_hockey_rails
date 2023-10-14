@@ -43,6 +43,8 @@ Pool::Application.routes.draw do
     get 'home/pplast'
     get 'home/standings'
     get 'home/draft'
+    get 'home/fish'
+    post 'home/fish'
   end
   
   

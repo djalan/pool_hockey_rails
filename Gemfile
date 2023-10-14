@@ -54,3 +54,5 @@ gem 'rb-readline'
 gem 'execjs'
 
 gem 'puma'
+
+gem 'dalli', '<= 2.7.6'

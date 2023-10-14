@@ -56,6 +56,7 @@ GEM
     coffee-script-source (1.12.2)
     concurrent-ruby (1.1.10)
     crass (1.0.6)
+    dalli (2.7.6)
     erubis (2.7.0)
     execjs (2.8.1)
     globalid (0.4.2)
@@ -160,6 +161,7 @@ DEPENDENCIES
   capistrano (~> 3.4.0)
   capistrano-rails (~> 1.1)
   coffee-rails (~> 4.0.0)
+  dalli (<= 2.7.6)
   execjs
   jbuilder (~> 1.2)
   jquery-rails

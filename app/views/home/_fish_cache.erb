@@ -1,0 +1,26 @@
+<table>
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th>Team</th>
+			<th>Pos</th>
+			<th>Pooler</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% @players.each do |player| %>
+				<tr>
+					<td><%= player.name %></td>
+					<td><%= player.team %></td>
+					<td><%= player.position %></td>
+					<td>
+						<%= form_for player do |f| %>
+							<%= f.select :drafted, Player::POOLERS %>
+							<%= f.submit "Draft" %>
+						<% end %>
+					</td>
+					</td>
+				</tr>
+		<% end %>
+	</tbody>
+</table>

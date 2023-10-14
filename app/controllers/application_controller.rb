@@ -7,14 +7,30 @@ class ApplicationController < ActionController::Base
   before_action :block_user_agent
 
   def block_user_agent
-    case request.path
-    when '/', '/home/draft', '/home/alainhello', '/home/alainbye',
-         '/home/set_year'
+    # puts(request.path)
+    if request.path == '/'
+    elsif request.path == '/home/draft'
+    elsif request.path == '/home/alainhello'
+    elsif request.path == '/home/alainbye'
+    elsif request.path == '/home/set_year'
+    elsif request.path == '/home/fish'
+    elsif request.path.include? '/players/'
     else
       unless cookies[:whoami] == 'alain'
         render plain: 'forbidden', status: :forbidden
       end
     end
+
+    # case request.path
+    # when '/', '/home/draft', '/home/alainhello', '/home/alainbye',
+    #      '/home/set_year', '/home/fish', 
+    #      '/players/update', '/players/update_individual'
+    #
+    # else
+    #   unless cookies[:whoami] == 'alain'
+    #     render plain: 'forbidden', status: :forbidden
+    #   end
+    # end
   end
 
   def shared_stuff

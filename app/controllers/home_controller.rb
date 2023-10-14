@@ -67,7 +67,7 @@ class HomeController < ApplicationController
     @default_rank = next_rank
     @which_rank = position
   end
-  
+ 
 
   # CONTROLLERS
   ## /home Get
@@ -82,6 +82,11 @@ class HomeController < ApplicationController
 
   def all
     @players = positions_logic('', POINTS_DESC)
+  end
+  
+  def fish
+    # @players = Player.where('drafted = "no" AND season = ?', @year).order('name ASC')
+    @players = Player.where('season = ?', @year).order('name ASC')
   end
   
   def skaters
@@ -285,7 +290,7 @@ class HomeController < ApplicationController
       @max_to_draft = 20          
     when '2023-2024'
       @cap = 83_500_000
-      @poolers = ['Math', 'Alain', 'Ben', 'Mark']
+      @poolers = ['Ben', 'Alain', 'Mark', 'Math']
       @max_to_draft = 20          
     when '2023-2024-keeper'
       @cap = 83_500_000

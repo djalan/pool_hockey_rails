@@ -38,10 +38,11 @@
         / <%= link_to "Power Play", home_pp_path %>
         <%= link_to "+", home_pplast_path %>
 		/ <%= link_to "Standings", home_standings_path %>
-		/ <%= link_to "Draft", home_draft_path %>
 		/ <%= link_to "-i-", home_i_path %>
 		/ <%= link_to "Test", home_test_path %>
 		/ <%= link_to "Team", home_team_path %>
+		/ <%= link_to "DRAFT", home_draft_path %>
+		/ <%= link_to "Fish", home_fish_path %>
         / <%= form_tag("/home/set_year", method: "get") do %>
             <%= select_tag 'year', options_for_select(@list_years, @year) %>
             <%= select_tag 'showWhatPlayers', options_for_select(

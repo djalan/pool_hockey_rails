@@ -8,10 +8,12 @@
 	<% end %>
 </p>
 
-<%= form_tag params[:action] do |f| %>
-	<%= label_tag 'Salary max:' %>
-	<%= text_field_tag  :salary_max %>
-	<%= submit_tag "Filter" %>
+<% if cookies[:whoami] == 'alain' %>
+	<%= form_tag params[:action] do |f| %>
+		<%= label_tag 'Salary max:' %>
+		<%= text_field_tag  :salary_max %>
+		<%= submit_tag "Filter" %>
+	<% end %>
 <% end %>
 
 <br>
