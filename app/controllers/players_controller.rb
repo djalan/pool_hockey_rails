@@ -48,6 +48,49 @@ class PlayersController < ApplicationController
   def update
     case @mode
     when 'draft'
+      if player_params[:drafted] != 'no' && player_params[:drafted] != 'yes'
+        case @player.position.downcase
+        when 'l', 'r', 'w'
+          pp = Player.where(
+            "season = ? and drafted = ? and (position = 'L' OR position = 'R' OR position = 'W')",
+            @year, player_params[:drafted]
+          )
+        else
+          pp = Player.where(
+            "season = ? and drafted = ? and position = ?",
+            @year, player_params[:drafted], @player.position
+          )
+        end
+        puts "Validating pick... #{player_params[:drafted]} has #{pp.count} #{@player.position}"
+        
+        case @player.position.downcase
+        when 'c'
+          if pp.count == 4
+            render plain: "Error! Too many centers!"
+            return
+          end
+        when 'd'
+          if pp.count == 6
+            render plain: "Error! Too many defenders!"
+            return
+          end
+        when 'l', 'r', 'w'
+          if pp.count == 8
+            render plain: "Error! Too many wingers!"
+            return
+          end
+        when 'g'
+          if pp.count == 2
+            render plain: "Error! Too many goalies!"
+            return
+          end
+        when 'f'
+          render plain: "Error! 'F' is not a valid position!"
+          return
+        end
+      end
+        
+      
       respond_to do |format|
         if @player.update(player_params)
           format.html { redirect_to @player, notice: 'Player was successfully updated.' }
