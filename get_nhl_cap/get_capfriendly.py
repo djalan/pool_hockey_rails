@@ -2,7 +2,6 @@
 
 from requests import get
 from bs4 import BeautifulSoup
-from sys import exit
 import os
 
 BASE_URL = "https://www.capfriendly.com/teams/"
