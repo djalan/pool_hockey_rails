@@ -29,13 +29,18 @@
 			<th>Points</th>
 			<th>Gol</th>
 			<th>Ass</th>
-			<th>Last</th>
 			<th>Salary</th>
 			<th>PP</th>
 			<th>Even</th>
 			<th>Draft</th>
-			<th>Contract</th>
+			<th>D Pos</th>
+			<th>Age</th>
+			<th>Year left</th>
 			<th>Info</th>
+			<th>dff</th>
+			<th>rel dff</th>
+			<th>g60</th>
+			<th>p60</th>
 			<th>Edit</th>
 			<th>Pooler</th>
 			<th>Rank</th>
@@ -43,7 +48,7 @@
 	</thead>
 	<tbody>
 		<% @players.each do |player| %>
-		<tr style='background-color:<%=player.color%>' id='<%= player.id %>'>
+	<tr style='background-color:<%=player.color%>' id='<%= player.id %>'>
 			<% unless action_name == 'skaters_global' %>
 				<td><%= player.my_rank_position %></td>
 			<% else %>
@@ -56,13 +61,18 @@
 			<td><%= player.points %></td>
 			<td><%= player.nhl_goals %></td>
 			<td><%= player.nhl_assists %></td>
-			<td><i><%= player.last_team %></i></td>
 			<td><%= number_to_currency player.salary, precision: 0 %></td>
 			<td><%= player.power_play %></td>
 			<td><%= player.even_strength %></td>
 			<td><%= player.draft_year %></td>
+			<td><%= player.draft_position %></td>
+			<td><%= player.age %></td>
 			<td><%= player.contract %></td>
 			<td><%= player.info %></td>
+			<td><%= player.dff %></td>
+			<td><%= player.reldff %></td>
+			<td><%= player.g60 %></td>
+			<td><%= player.p60 %></td>
 			<td><%= link_to 'Edit', edit_player_path(player) %></td>
 			<td>
 				<%= form_for player do |f| %>

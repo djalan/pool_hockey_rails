@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20220926212330) do
+ActiveRecord::Schema.define(version: 20240922034349) do
 
   create_table "players", force: :cascade do |t|
     t.string   "name",             limit: 255
@@ -42,6 +42,12 @@ ActiveRecord::Schema.define(version: 20220926212330) do
     t.string   "contract"
     t.string   "info"
     t.integer  "live_draft"
+    t.integer  "draft_position"
+    t.string   "age"
+    t.float    "dff"
+    t.float    "reldff"
+    t.float    "g60"
+    t.float    "p60"
   end
 
 end
