@@ -106,3 +106,13 @@ p.destroy_all
 
 - You need to `require '/myapp/get_nhl_cap/imp.rb'` every time you change the CSV
 - It appears the csv file is loaded at the same time the ruby file is `require`
+
+## 2024-2025
+
+```ruby
+docker compose up
+docker exec -it pool_hockey_rails-web-1 /bin/bash
+bin/rails generate migration AddPartNumberToProducts
+bin/rake db:migrate
+bin/rake db:rollback
+```
