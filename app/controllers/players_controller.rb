@@ -61,33 +61,34 @@ class PlayersController < ApplicationController
             @year, player_params[:drafted], @player.position
           )
         end
-        puts "Validating pick... #{player_params[:drafted]} has #{pp.count} #{@player.position}"
-        
-        case @player.position.downcase
-        when 'c'
-          if pp.count == 4
-            render plain: "Error! Too many centers!"
-            return
-          end
-        when 'd'
-          if pp.count == 6
-            render plain: "Error! Too many defenders!"
-            return
-          end
-        when 'l', 'r', 'w'
-          if pp.count == 8
-            render plain: "Error! Too many wingers!"
-            return
-          end
-        when 'g'
-          if pp.count == 2
-            render plain: "Error! Too many goalies!"
-            return
-          end
-        when 'f'
-          render plain: "Error! 'F' is not a valid position!"
-          return
-        end
+        # TODO uncomment before draft
+        # puts "Validating pick... #{player_params[:drafted]} has #{pp.count} #{@player.position}"
+        #
+        # case @player.position.downcase
+        # when 'c'
+        #   if pp.count == 4
+        #     render plain: "Error! Too many centers!"
+        #     return
+        #   end
+        # when 'd'
+        #   if pp.count == 6
+        #     render plain: "Error! Too many defenders!"
+        #     return
+        #   end
+        # when 'l', 'r', 'w'
+        #   if pp.count == 8
+        #     render plain: "Error! Too many wingers!"
+        #     return
+        #   end
+        # when 'g'
+        #   if pp.count == 2
+        #     render plain: "Error! Too many goalies!"
+        #     return
+        #   end
+        # when 'f'
+        #   render plain: "Error! 'F' is not a valid position!"
+        #   return
+        # end
       end
         
       
@@ -123,16 +124,33 @@ class PlayersController < ApplicationController
       end
 
       if whichRank != nil
-        case whichRank
-        when :my_rank_position
-          case @player.position
-          when 'L', 'R'
-            position = '(position = "L" OR position = "R")'
-          else
-            position = "position = \"#{@player.position}\""
+        if @player.season == "2024-2025"
+          # puts("redraft, position of forward DONT matter")
+          case whichRank
+          when :my_rank_position
+            case @player.position
+            when 'L', 'R', 'C', 'F', 'W'
+              position = '(position = "L" OR position = "R" OR position = "C" OR position = "F" OR position = "W")'
+            else
+              position = "position = \"#{@player.position}\""
+            end
+          when :my_rank_global
+              position = 'position != "G"'
           end
-        when :my_rank_global
-            position = 'position != "G"'
+
+        else
+          # puts("keeper season, position of forward matters")
+          case whichRank
+          when :my_rank_position
+            case @player.position
+            when 'L', 'R'
+              position = '(position = "L" OR position = "R")'
+            else
+              position = "position = \"#{@player.position}\""
+            end
+          when :my_rank_global
+              position = 'position != "G"'
+          end
         end
         
         relation = Player

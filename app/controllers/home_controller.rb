@@ -44,9 +44,9 @@ class HomeController < ApplicationController
     session[:return_to] = request.fullpath
     if params[:salary_max]
       flash.now[:notice] = params[:salary_max]
-      return Player.where(where, params[:salary_max], @year).order(order).limit(350)
+      return Player.where(where, params[:salary_max], @year).order(order).limit(1350)
     else
-      return Player.where(where, @year,).order(order).limit(350)
+      return Player.where(where, @year,).order(order).limit(1350)
     end
   end
 
@@ -103,6 +103,10 @@ class HomeController < ApplicationController
   def centers
     @players = positions_logic('(position = "C" OR position = "F")', POINTS_DESC)
   end
+
+  def forwards
+    @players = positions_logic('(position = "C" OR position = "F" OR position = "L" OR position = "R" OR position = "W")', POINTS_DESC)
+  end
   
   def defenders
     @players = positions_logic('position = "D"', POINTS_DESC)
@@ -139,6 +143,14 @@ class HomeController < ApplicationController
   def centers_rank
     @players = positions_logic(
       'position = "C"',
+      [RANK_POS_ASC, POINTS_DESC],
+    )
+    generate_choices_rank(@players)
+  end
+
+  def forwards_rank
+    @players = positions_logic(
+      '(position = "C" OR position = "F" OR position = "L" OR position = "R" OR position = "W")',
       [RANK_POS_ASC, POINTS_DESC],
     )
     generate_choices_rank(@players)
@@ -295,6 +307,14 @@ class HomeController < ApplicationController
     when '2023-2024-keeper'
       @cap = 83_500_000
       @poolers = ['Ben', 'Couv', 'Math', 'Alain', 'Mark']
+      @max_to_draft = 20          
+    when '2024-2025'
+      @cap = 88_000_000
+      @poolers = ['Ben', 'Math', 'Mark', 'Alain']
+      @max_to_draft = 20          
+    when '2024-2025-keeper'
+      @cap = 88_000_000
+      @poolers = ['Mark', 'Ben', 'Math', 'Alain', 'Couv']
       @max_to_draft = 20          
     end
     
