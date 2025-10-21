@@ -32,15 +32,15 @@ def go
       p.rank = l[13]
       p.drafted = l[14]
       p.age = l[15]
-      p.draft_pick = l[16]
+      p.draft_position = l[16]
       p.draft_year = l[17]
-      p.year_left_contract = l[18]
+      p.contract = l[18]
       p.dff = l[19]
       p.reldff = l[20]
       p.g60 = l[21]
       p.p60 = l[22]
       p.color = 'white'
-      p.season = '2025-2026'
+      p.season = '2025-2026-keeper'
 
       printf("%-25s %s\n", p.name, p.valid?) unless p.valid?
       p.save

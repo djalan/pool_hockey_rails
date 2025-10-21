@@ -124,13 +124,18 @@ class PlayersController < ApplicationController
       end
 
       if whichRank != nil
-        if @player.season == "2024-2025"
+        # if @player.season == "2024-2025" || @player.season == "2025-2026" || @player.season == "2025-2026-keeper"
+        if ["2024-2025", "2025-2026", "2025-2026-keeper"].include? @player.season
           # puts("redraft, position of forward DONT matter")
           case whichRank
           when :my_rank_position
             case @player.position
-            when 'L', 'R', 'C', 'F', 'W'
-              position = '(position = "L" OR position = "R" OR position = "C" OR position = "F" OR position = "W")'
+            when 'C'
+              position = '(position = "C" OR position = "F")'
+            when 'W'
+              position = '(position = "W" OR position = "F")'
+            when 'F'
+              position = '(position = "W" OR position = "F" OR position = "C")'
             else
               position = "position = \"#{@player.position}\""
             end

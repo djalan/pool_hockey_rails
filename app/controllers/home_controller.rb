@@ -95,7 +95,7 @@ class HomeController < ApplicationController
   
   def wingers
     @players = positions_logic(
-      '(position = "L" OR position = "R" OR position = "F")',
+      '(position = "L" OR position = "R" OR position = "F" OR position = "W")',
       POINTS_DESC,
     )
   end
@@ -134,7 +134,7 @@ class HomeController < ApplicationController
   
   def wingers_rank
     @players = positions_logic(
-      '(position = "L" OR position = "R")',
+      '(position = "L" OR position = "R" OR position = "F" OR position = "W")',
       [RANK_POS_ASC, POINTS_DESC],
     )
     generate_choices_rank(@players)
@@ -142,7 +142,7 @@ class HomeController < ApplicationController
 
   def centers_rank
     @players = positions_logic(
-      'position = "C"',
+      '(position = "C" OR position = "F")',
       [RANK_POS_ASC, POINTS_DESC],
     )
     generate_choices_rank(@players)
@@ -315,6 +315,14 @@ class HomeController < ApplicationController
     when '2024-2025-keeper'
       @cap = 88_000_000
       @poolers = ['Mark', 'Ben', 'Math', 'Alain', 'Couv']
+      @max_to_draft = 20          
+    when '2025-2026'
+      @cap = 95_500_000
+      @poolers = ['Alain', 'Math', 'Ben', 'Mark', 'Couv']
+      @max_to_draft = 20          
+    when '2025-2026-keeper'
+      @cap = 95_500_000
+      @poolers = ['Math', 'Ben', 'Alain', 'Mark']
       @max_to_draft = 20          
     end
     

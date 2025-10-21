@@ -10,7 +10,7 @@ module HomeHelper
   
   def player_drafted(person, position)
     if position == 'W'
-      Player.where("drafted = '#{person}' AND (position = 'L' OR position ='R') AND season = ?", @year)
+      Player.where("drafted = '#{person}' AND (position = 'L' OR position = 'R' OR position = 'W') AND season = ?", @year)
     else
       Player.where("drafted = '#{person}' AND position = '#{position}' AND season = ?", @year)
     end

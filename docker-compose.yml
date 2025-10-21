@@ -1,7 +1,5 @@
-version: '3.8'
-
 volumes:
-    pool_ruby_gems:
+  pool_ruby_gems:
 
 services:
   web:
@@ -9,10 +7,7 @@ services:
     volumes:
       - .:/myapp
       - pool_ruby_gems:/var/tmp/pool_ruby_gems
-      - /etc/ssl/private/${MY_URL}:/var/tmp/${MY_URL}
     ports:
-      - "3000:9292"
+      - '3000:9292'
     build:
       context: .
-    env_file:
-      - .env

@@ -50,6 +50,8 @@ class ApplicationController < ActionController::Base
       ['2023-2024 Keeper', '2023-2024-keeper'],
       ['2024-2025'],
       ['2024-2025 Keeper', '2024-2025-keeper'],
+      ['2025-2026'],
+      ['2025-2026 Keeper', '2025-2026-keeper'],
     ]
     list_years_db_values = @list_years.map { |arr| arr.last }
 
@@ -116,6 +118,12 @@ class ApplicationController < ActionController::Base
       }
 
     when '2024-2025', '2024-2025-keeper'
+      @teams = %W{
+        ANA BOS BUF CGY CAR CHI COL CLB DAL DET EDM FLA LAK MIN MTL NAS
+        NJD NYI NYR OTT PHI PIT SEA SJS STL TBL TOR UTA VAN VGK WAS WPG NA
+      }
+
+    when '2025-2026', '2025-2026-keeper'
       @teams = %W{
         ANA BOS BUF CGY CAR CHI COL CLB DAL DET EDM FLA LAK MIN MTL NAS
         NJD NYI NYR OTT PHI PIT SEA SJS STL TBL TOR UTA VAN VGK WAS WPG NA
