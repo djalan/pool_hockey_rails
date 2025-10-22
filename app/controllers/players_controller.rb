@@ -140,7 +140,8 @@ class PlayersController < ApplicationController
               position = "position = \"#{@player.position}\""
             end
           when :my_rank_global
-              position = 'position != "G"'
+              position = '(position = "W" OR position = "F")'
+              # position = 'position != "G"'
           end
 
         else

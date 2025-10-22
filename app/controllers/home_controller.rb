@@ -117,9 +117,10 @@ class HomeController < ApplicationController
   end
   
   ## Rank controllers
+  #'(position = "L" OR position = "R" OR position = "F" OR position = "W")',
   def skaters_global
     @players = positions_logic(
-      'position != "G"',
+      '(position = "F" OR position = "W")',
       ['my_rank_global ASC', POINTS_DESC],
     )
     generate_choices_rank(@players, :my_rank_global)
