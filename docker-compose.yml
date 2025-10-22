@@ -11,3 +11,4 @@ services:
       - '3000:9292'
     build:
       context: .
+    privileged: true
