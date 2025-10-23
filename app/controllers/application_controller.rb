@@ -58,7 +58,7 @@ class ApplicationController < ActionController::Base
     if cookies[:year] && (list_years_db_values.include? cookies[:year])
       @year = cookies[:year]
     else
-      @year = '2024-2025-keeper'
+      @year = '2025-2026'
     end
 
     # Dropdown what players
